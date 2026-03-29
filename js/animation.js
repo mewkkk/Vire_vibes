@@ -1,31 +1,31 @@
 // screen1: logo
-function mixChannel(start, end, progress) {
+function mixNumber(start, end, progress) {
   return Math.round(start + (end - start) * progress);
 }
 
-function mixColors(firstColor, secondColor, progress) {
+function mixColor(firstColor, secondColor, progress) {
   return {
-    r: mixChannel(firstColor.r, secondColor.r, progress),
-    g: mixChannel(firstColor.g, secondColor.g, progress),
-    b: mixChannel(firstColor.b, secondColor.b, progress),
+    r: mixNumber(firstColor.r, secondColor.r, progress),
+    g: mixNumber(firstColor.g, secondColor.g, progress),
+    b: mixNumber(firstColor.b, secondColor.b, progress),
   };
 }
 
-function colorToString(color, alpha = 1) {
+function colorText(color, alpha = 1) {
   return "rgba(" + color.r + ", " + color.g + ", " + color.b + ", " + alpha + ")";
 }
 
-function getThreePointColor(value, startColor, middleColor, endColor) {
+function getColorByValue(value, startColor, middleColor, endColor) {
   if (value <= 50) {
-    return mixColors(startColor, middleColor, value / 50);
+    return mixColor(startColor, middleColor, value / 50);
   }
 
-  return mixColors(middleColor, endColor, (value - 50) / 50);
+  return mixColor(middleColor, endColor, (value - 50) / 50);
 }
 
-function startLogoAnimation() {
+function startLogo() {
   const logoBox = document.getElementById("logo");
-  const logoCanvas = document.getElementById("logo_animation");
+  const logoCanvas = document.getElementById("logo_canvas");
   const logoColor = "#0a4d2c";
 
   if (!logoBox || !logoCanvas) {
@@ -163,7 +163,7 @@ function startLogoAnimation() {
     mouse.inside = false;
   }
 
-  function startLogo() {
+  function redrawLogo() {
     setCanvasSize();
     buildDots();
 
@@ -177,32 +177,32 @@ function startLogoAnimation() {
 
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(startLogo, 120);
+    resizeTimer = window.setTimeout(redrawLogo, 120);
   });
 
   if (document.fonts && document.fonts.load) {
-    document.fonts.load('200px "logo_font"').then(startLogo);
+    document.fonts.load('200px "logo_font"').then(redrawLogo);
   } else {
-    startLogo();
+    redrawLogo();
   }
 }
 
 // screen2: climate
-function startClimateScreen() {
+function startClimate() {
   const section = document.getElementById("screen2");
-  const plantCanvas = document.getElementById("plant_canvas");
-  const waterSlider = document.getElementById("water_slider");
-  const heatSlider = document.getElementById("heat_slider");
-  const leftGlow = section ? section.querySelector(".screen2__glow--left") : null;
-  const rightGlow = section ? section.querySelector(".screen2__glow--right") : null;
-  const leftRings = section ? section.querySelector(".screen2__rings--left") : null;
-  const rightRings = section ? section.querySelector(".screen2__rings--right") : null;
+  const climateCanvas = document.getElementById("screen2_canvas");
+  const humiditySlider = document.getElementById("humidity_slider");
+  const temperatureSlider = document.getElementById("temperature_slider");
+  const leftGlow = section ? section.querySelector(".screen2__glow.glow_left") : null;
+  const rightGlow = section ? section.querySelector(".screen2__glow.glow_right") : null;
+  const leftRings = section ? section.querySelector(".screen2__rings.rings_left") : null;
+  const rightRings = section ? section.querySelector(".screen2__rings.rings_right") : null;
 
-  if (!section || !plantCanvas || !waterSlider || !heatSlider) {
+  if (!section || !climateCanvas || !humiditySlider || !temperatureSlider) {
     return;
   }
 
-  const ctx = plantCanvas.getContext("2d");
+  const ctx = climateCanvas.getContext("2d");
 
   if (!ctx) {
     return;
@@ -213,8 +213,8 @@ function startClimateScreen() {
   const warmColor = { r: 245, g: 124, b: 17 };
 
   function setCanvasSize() {
-    plantCanvas.width = plantCanvas.clientWidth;
-    plantCanvas.height = plantCanvas.clientHeight;
+    climateCanvas.width = climateCanvas.clientWidth;
+    climateCanvas.height = climateCanvas.clientHeight;
   }
 
   function updateSliderBackground(range, value, activeColor) {
@@ -223,8 +223,8 @@ function startClimateScreen() {
   }
 
   function updateDecor(tempColor, humidityColor) {
-    const tempString = colorToString(tempColor, 1);
-    const humidityString = colorToString(humidityColor, 1);
+    const tempString = colorText(tempColor, 1);
+    const humidityString = colorText(humidityColor, 1);
 
     section.style.setProperty("--temp-color", tempString);
     section.style.setProperty("--humidity-color", humidityString);
@@ -232,32 +232,32 @@ function startClimateScreen() {
     if (leftGlow) {
       leftGlow.style.background =
         "radial-gradient(circle, " +
-        colorToString(tempColor, 0.72) +
+        colorText(tempColor, 0.72) +
         " 0%, " +
-        colorToString(tempColor, 0.28) +
+        colorText(tempColor, 0.28) +
         " 36%, rgba(255,255,255,0) 74%)";
     }
 
     if (rightGlow) {
       rightGlow.style.background =
         "radial-gradient(circle, " +
-        colorToString(tempColor, 0.72) +
+        colorText(tempColor, 0.72) +
         " 0%, " +
-        colorToString(tempColor, 0.28) +
+        colorText(tempColor, 0.28) +
         " 36%, rgba(255,255,255,0) 74%)";
     }
 
     if (leftRings) {
       leftRings.style.background =
         "repeating-radial-gradient(circle, transparent 0 28px, " +
-        colorToString(humidityColor, 0.46) +
+        colorText(humidityColor, 0.46) +
         " 28px 32px)";
     }
 
     if (rightRings) {
       rightRings.style.background =
         "repeating-radial-gradient(circle, transparent 0 28px, " +
-        colorToString(humidityColor, 0.46) +
+        colorText(humidityColor, 0.46) +
         " 28px 32px)";
     }
   }
@@ -298,20 +298,20 @@ function startClimateScreen() {
     }
   }
 
-  function drawPlant() {
-    const width = plantCanvas.width;
-    const height = plantCanvas.height;
-    const waterValue = Number(waterSlider.value);
-    const heatValue = Number(heatSlider.value);
+  function drawTree() {
+    const width = climateCanvas.width;
+    const height = climateCanvas.height;
+    const waterValue = Number(humiditySlider.value);
+    const heatValue = Number(temperatureSlider.value);
 
-    const tempColor = getThreePointColor(heatValue, coldColor, centerColor, warmColor);
-    const humidityColor = getThreePointColor(waterValue, warmColor, centerColor, coldColor);
+    const tempColor = getColorByValue(heatValue, coldColor, centerColor, warmColor);
+    const humidityColor = getColorByValue(waterValue, warmColor, centerColor, coldColor);
 
     ctx.clearRect(0, 0, width, height);
 
     updateDecor(tempColor, humidityColor);
-    updateSliderBackground(heatSlider, heatValue, colorToString(tempColor, 1));
-    updateSliderBackground(waterSlider, waterValue, colorToString(humidityColor, 1));
+    updateSliderBackground(temperatureSlider, heatValue, colorText(tempColor, 1));
+    updateSliderBackground(humiditySlider, waterValue, colorText(humidityColor, 1));
 
     const baseLength = height * (0.145 + heatValue / 560);
     const depth = 4 + Math.round((waterValue / 100) * 2);
@@ -334,49 +334,49 @@ function startClimateScreen() {
       depth,
       depth,
       config,
-      colorToString(tempColor, 0.98)
+      colorText(tempColor, 0.98)
     );
   }
 
-  function updateScreen2() {
-    const waterValue = Number(waterSlider.value);
-    const heatValue = Number(heatSlider.value);
+  function updateClimate() {
+    const waterValue = Number(humiditySlider.value);
+    const heatValue = Number(temperatureSlider.value);
 
     section.style.setProperty("--temp-fill", heatValue + "%");
     section.style.setProperty("--humidity-fill", waterValue + "%");
-    drawPlant();
+    drawTree();
   }
 
   function onResize() {
     setCanvasSize();
-    updateScreen2();
+    updateClimate();
   }
 
-  waterSlider.addEventListener("input", updateScreen2);
-  heatSlider.addEventListener("input", updateScreen2);
+  humiditySlider.addEventListener("input", updateClimate);
+  temperatureSlider.addEventListener("input", updateClimate);
   window.addEventListener("resize", onResize);
 
   onResize();
 }
 
 // screen3: plant cards
-function startCatalogCards() {
-  const plantsBox = document.getElementById("plants_box");
-  const plantItems = plantsBox ? Array.from(plantsBox.querySelectorAll(".plant")) : [];
+function startCards() {
+  const plantsArea = document.getElementById("screen3_plants");
+  const plantItems = plantsArea ? Array.from(plantsArea.querySelectorAll(".plant")) : [];
 
-  if (!plantsBox || plantItems.length === 0) {
+  if (!plantsArea || plantItems.length === 0) {
     return;
   }
 
-  function closeCards() {
-    plantsBox.classList.remove("has-active");
+  function hideCards() {
+    plantsArea.classList.remove("has-active");
     plantItems.forEach((plantItem) => {
       plantItem.classList.remove("is-active");
     });
   }
 
-  function openCard(plantItem) {
-    plantsBox.classList.add("has-active");
+  function showCard(plantItem) {
+    plantsArea.classList.add("has-active");
     plantItems.forEach((item) => {
       item.classList.toggle("is-active", item === plantItem);
     });
@@ -387,11 +387,11 @@ function startCatalogCards() {
       event.stopPropagation();
 
       if (plantItem.classList.contains("is-active")) {
-        closeCards();
+        hideCards();
         return;
       }
 
-      openCard(plantItem);
+      showCard(plantItem);
     });
 
     plantItem.addEventListener("keydown", (event) => {
@@ -404,27 +404,27 @@ function startCatalogCards() {
 
   document.addEventListener("click", (event) => {
     if (!(event.target instanceof Element) || !event.target.closest(".plant")) {
-      closeCards();
+      hideCards();
     }
   });
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
-      closeCards();
+      hideCards();
     }
   });
 }
 
 // screen4: build plant
-function startPlantBuilder() {
+function startBuildPlant() {
   const section = document.getElementById("screen4");
-  const dropCircle = document.getElementById("elements_drop");
-  const previewBox = document.getElementById("elements_preview");
-  const plantResult = document.getElementById("plant_result");
-  const resetButton = document.getElementById("restart_button");
-  const dragItems = section ? Array.from(section.querySelectorAll(".element")) : [];
+  const dropZone = document.getElementById("screen4_drop_zone");
+  const previewArea = document.getElementById("screen4_preview");
+  const plantBox = document.getElementById("screen4_plant_box");
+  const resetButton = document.getElementById("screen4_reset");
+  const toolButtons = section ? Array.from(section.querySelectorAll(".element")) : [];
 
-  if (!section || !dropCircle || !previewBox || !plantResult || !resetButton || dragItems.length === 0) {
+  if (!section || !dropZone || !previewArea || !plantBox || !resetButton || toolButtons.length === 0) {
     return;
   }
 
@@ -437,11 +437,11 @@ function startPlantBuilder() {
     { left: "16%", top: "47%", size: 56 },
   ];
 
-  const placedIds = new Set();
+  const placedButtons = new Set();
   let dragState = null;
 
-  function updateSectionState() {
-    const hasProgress = placedIds.size > 0;
+  function checkBuildState() {
+    const hasProgress = placedButtons.size > 0;
 
     section.classList.toggle("screen4--active", hasProgress);
   }
@@ -455,35 +455,35 @@ function startPlantBuilder() {
       dragState.ghost.parentNode.removeChild(dragState.ghost);
     }
 
-    dropCircle.classList.remove("is-hovered");
+    dropZone.classList.remove("is-hovered");
     window.removeEventListener("pointermove", onPointerMove);
     window.removeEventListener("pointerup", onPointerUp);
     window.removeEventListener("pointercancel", onPointerUp);
     dragState = null;
   }
 
-  function resetBuilder() {
+  function resetBuild() {
     clearDrag();
-    placedIds.clear();
-    previewBox.innerHTML = "";
+    placedButtons.clear();
+    previewArea.innerHTML = "";
     section.classList.remove("screen4--active");
     section.classList.remove("screen4--grown");
-    plantResult.classList.remove("plant_result--show");
+    plantBox.classList.remove("screen4__plant_box--show");
 
-    dragItems.forEach((dragItem) => {
-      dragItem.classList.remove("is-placed");
+    toolButtons.forEach((toolButton) => {
+      toolButton.classList.remove("is-placed");
     });
   }
 
-  function showPlant() {
+  function showReadyPlant() {
     section.classList.add("screen4--grown");
-    plantResult.classList.remove("plant_result--show");
-    void plantResult.offsetWidth;
-    plantResult.classList.add("plant_result--show");
+    plantBox.classList.remove("screen4__plant_box--show");
+    void plantBox.offsetWidth;
+    plantBox.classList.add("screen4__plant_box--show");
   }
 
-  function addDropPreview(dragItem) {
-    const slot = dropSlots[Math.min(placedIds.size, dropSlots.length - 1)];
+  function addPreview(dragItem) {
+    const slot = dropSlots[Math.min(placedButtons.size, dropSlots.length - 1)];
     const icon = dragItem.querySelector("img");
 
     if (!icon) {
@@ -493,35 +493,32 @@ function startPlantBuilder() {
     const item = document.createElement("div");
     const itemImage = icon.cloneNode(true);
 
-    item.className = "element_preview";
-    item.dataset.toolId = dragItem.dataset.toolId || "";
+    item.className = "screen4__preview_item";
     item.style.left = slot.left;
     item.style.top = slot.top;
     item.style.width = slot.size + "px";
 
     item.appendChild(itemImage);
-    previewBox.appendChild(item);
+    previewArea.appendChild(item);
   }
 
-  function dropItem(dragItem) {
-    const toolId = dragItem.dataset.toolId || "";
-
-    if (!toolId || placedIds.has(toolId)) {
+  function putItem(dragItem) {
+    if (placedButtons.has(dragItem)) {
       return;
     }
 
-    addDropPreview(dragItem);
-    placedIds.add(toolId);
+    addPreview(dragItem);
+    placedButtons.add(dragItem);
     dragItem.classList.add("is-placed");
-    updateSectionState();
+    checkBuildState();
 
-    if (placedIds.size === dragItems.length) {
-      showPlant();
+    if (placedButtons.size === toolButtons.length) {
+      showReadyPlant();
     }
   }
 
-  function isInsideCircle(clientX, clientY) {
-    const rect = dropCircle.getBoundingClientRect();
+  function isInDropCircle(clientX, clientY) {
+    const rect = dropZone.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
     const distance = Math.hypot(clientX - centerX, clientY - centerY);
@@ -537,7 +534,7 @@ function startPlantBuilder() {
     dragState.ghost.style.transform =
       "translate(" + (event.clientX - 58) + "px, " + (event.clientY - 58) + "px)";
 
-    dropCircle.classList.toggle("is-hovered", isInsideCircle(event.clientX, event.clientY));
+    dropZone.classList.toggle("is-hovered", isInDropCircle(event.clientX, event.clientY));
   }
 
   function onPointerUp(event) {
@@ -545,8 +542,8 @@ function startPlantBuilder() {
       return;
     }
 
-    if (isInsideCircle(event.clientX, event.clientY)) {
-      dropItem(dragState.tool);
+    if (isInDropCircle(event.clientX, event.clientY)) {
+      putItem(dragState.tool);
     }
 
     clearDrag();
@@ -558,9 +555,8 @@ function startPlantBuilder() {
     }
 
     const tool = event.currentTarget;
-    const toolId = tool.dataset.toolId || "";
 
-    if (!toolId || placedIds.has(toolId)) {
+    if (placedButtons.has(tool)) {
       return;
     }
 
@@ -592,20 +588,19 @@ function startPlantBuilder() {
     window.addEventListener("pointercancel", onPointerUp);
   }
 
-  dragItems.forEach((dragItem) => {
-    dragItem.addEventListener("pointerdown", onPointerDown);
+  toolButtons.forEach((toolButton) => {
+    toolButton.addEventListener("pointerdown", onPointerDown);
   });
 
-  resetButton.addEventListener("click", resetBuilder);
+  resetButton.addEventListener("click", resetBuild);
 }
 
 // screen5: grow random flower
-function startScreen5Grow() {
-  const section = document.getElementById("screen5");
-  const field = document.getElementById("screen5_field");
-  const plantsLayer = document.getElementById("screen5_plants");
+function startGrowFlowers() {
+  const field = document.getElementById("screen5_ground");
+  const flowersLayer = document.getElementById("screen5_flowers");
 
-  if (!section || !field || !plantsLayer) {
+  if (!field || !flowersLayer) {
     return;
   }
 
@@ -621,12 +616,13 @@ function startScreen5Grow() {
   const preloadedPlants = new Map();
 
   const maxPlants = 14;
+  const growTime = 1550;
 
   function clamp(value, min, max) {
     return Math.max(min, Math.min(max, value));
   }
 
-  function pickRandomPlant() {
+  function getRandomPlant() {
     const index = Math.floor(Math.random() * plants.length);
     return plants[index];
   }
@@ -639,7 +635,7 @@ function startScreen5Grow() {
     });
   }
 
-  function waitForImage(image, imagePath) {
+  function waitImage(image, imagePath) {
     return new Promise((resolve) => {
       function finish() {
         resolve();
@@ -655,8 +651,8 @@ function startScreen5Grow() {
     });
   }
 
-  function removeOldPlant() {
-    const oldPlant = plantsLayer.firstElementChild;
+  function removeFirstFlower() {
+    const oldPlant = flowersLayer.firstElementChild;
 
     if (!oldPlant) {
       return;
@@ -670,8 +666,9 @@ function startScreen5Grow() {
     }, 380);
   }
 
-  async function growPlant(event) {
+  async function growFlower(event) {
     const rect = field.getBoundingClientRect();
+    const stage = flowersLayer.getBoundingClientRect();
     const clickX = event.clientX - rect.left;
     const clickY = event.clientY - rect.top;
 
@@ -679,21 +676,22 @@ function startScreen5Grow() {
       return;
     }
 
-    const xPercent = clamp(clickX / rect.width, 0.06, 0.94);
-    const yPercent = clamp(clickY / rect.height, 0.2, 0.94);
-    const bottomFromClick = (1 - yPercent) * rect.height - 12;
-    const bottom = clamp(bottomFromClick, 8, rect.height * 0.55);
-    const widthBase = rect.width * 0.135;
-    const width = clamp(widthBase * (0.78 + Math.random() * 0.5), 92, 240);
+    const rootX = clamp(event.clientX - stage.left, 18, stage.width - 18);
+    const rootBottom = event.clientY <= stage.bottom
+      ? stage.bottom - event.clientY
+      : -(event.clientY - stage.bottom);
+    const bottom = clamp(rootBottom, -stage.height * 0.18, stage.height * 0.68);
+    const widthBase = stage.width * 0.118;
+    const width = clamp(widthBase * (0.82 + Math.random() * 0.42), 88, 210);
     const rotate = (Math.random() - 0.5) * 6;
 
     const plant = document.createElement("article");
     const image = document.createElement("img");
-    const imagePath = pickRandomPlant();
+    const imagePath = getRandomPlant();
     const cachedImage = preloadedPlants.get(imagePath);
 
-    plant.className = "screen5_plant";
-    plant.style.left = xPercent * 100 + "%";
+    plant.className = "screen5__flower";
+    plant.style.left = rootX + "px";
     plant.style.bottom = bottom + "px";
     plant.style.width = width + "px";
     plant.style.setProperty("--plant-rotate", rotate.toFixed(2) + "deg");
@@ -705,74 +703,177 @@ function startScreen5Grow() {
     if (cachedImage && cachedImage.complete) {
       image.src = imagePath;
     } else {
-      await waitForImage(image, imagePath);
+      await waitImage(image, imagePath);
     }
 
-    plantsLayer.appendChild(plant);
+    const imageWidth = image.naturalWidth || (cachedImage ? cachedImage.naturalWidth : 0) || 260;
+    const imageHeight = image.naturalHeight || (cachedImage ? cachedImage.naturalHeight : 0) || 385;
+    const plantHeight = clamp(width * (imageHeight / imageWidth), 130, stage.height * 0.62);
+
+    plant.style.setProperty("--plant-height", plantHeight + "px");
+    plant.style.height = "0px";
+
+    flowersLayer.appendChild(plant);
 
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        plant.classList.add("is-growing");
+        plant.style.height = plantHeight + "px";
+        plant.classList.add("is-visible");
+
+        window.setTimeout(() => {
+          if (plant.parentNode && !plant.classList.contains("is-removing")) {
+            plant.classList.add("is-resting");
+          }
+        }, growTime);
       });
     });
 
-    if (plantsLayer.children.length > maxPlants) {
-      removeOldPlant();
+    if (flowersLayer.children.length > maxPlants) {
+      removeFirstFlower();
     }
   }
 
   preloadPlants();
-  field.addEventListener("click", growPlant);
+  field.addEventListener("click", growFlower);
 }
 
-function startSiteCursor() {
+function startCursor() {
   if (!window.matchMedia("(pointer: fine)").matches) {
     return;
   }
 
-  const cursor = document.createElement("div");
-  const dot = document.createElement("div");
+  const canvas = document.getElementById("cursor_swarm");
 
-  cursor.className = "site_cursor";
-  dot.className = "site_cursor_dot";
+  if (!(canvas instanceof HTMLCanvasElement)) {
+    return;
+  }
 
-  document.body.appendChild(cursor);
-  document.body.appendChild(dot);
+  const ctx = canvas.getContext("2d");
 
-  const hoverTargets = "a, button, input, canvas, .element, .plant";
-  let targetX = window.innerWidth / 2;
-  let targetY = window.innerHeight / 2;
-  let ringX = targetX;
-  let ringY = targetY;
-  let dotX = targetX;
-  let dotY = targetY;
-  let raf = 0;
+  if (!ctx) {
+    return;
+  }
 
-  function tick() {
-    ringX += (targetX - ringX) * 0.15;
-    ringY += (targetY - ringY) * 0.15;
-    dotX += (targetX - dotX) * 0.34;
-    dotY += (targetY - dotY) * 0.34;
+  let mouse = {
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2,
+  };
+  let trail = [];
+  let dust = [];
+  let isVisible = false;
+  let isHover = false;
+  let frame = 0;
 
-    cursor.style.transform = "translate(" + ringX + "px, " + ringY + "px) translate(-50%, -50%)";
-    dot.style.transform = "translate(" + dotX + "px, " + dotY + "px) translate(-50%, -50%)";
+  function makeCursor() {
+    const ratio = window.devicePixelRatio || 1;
 
-    raf = requestAnimationFrame(tick);
+    canvas.width = window.innerWidth * ratio;
+    canvas.height = window.innerHeight * ratio;
+    canvas.style.width = window.innerWidth + "px";
+    canvas.style.height = window.innerHeight + "px";
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+    trail = Array.from({ length: 10 }, (_, index) => ({
+      x: mouse.x,
+      y: mouse.y,
+      size: 4.8 - index * 0.2,
+    }));
+
+    dust = Array.from({ length: 18 }, () => ({
+      angle: Math.random() * Math.PI * 2,
+      radius: 8 + Math.random() * 14,
+      speed: 0.002 + Math.random() * 0.004,
+      offset: Math.random() * Math.PI * 2,
+    }));
+  }
+
+  function drawLine() {
+    for (let i = 1; i < trail.length; i += 1) {
+      const first = trail[i - 1];
+      const second = trail[i];
+      const alpha = 0.4 - (i / trail.length) * 0.28;
+
+      ctx.strokeStyle = "rgba(83, 158, 102, " + alpha + ")";
+      ctx.lineWidth = Math.max(0.7, 2.2 - i * 0.05);
+      ctx.beginPath();
+      ctx.moveTo(first.x, first.y);
+      ctx.lineTo(second.x, second.y);
+      ctx.stroke();
+    }
+  }
+
+  function drawDots() {
+    trail.forEach((point, index) => {
+      const alpha = 0.64 - (index / trail.length) * 0.5;
+      const size = Math.max(1.2, point.size);
+
+      ctx.fillStyle = "rgba(93, 168, 111, " + alpha + ")";
+      ctx.beginPath();
+      ctx.arc(point.x, point.y, size, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  }
+
+  function drawDust() {
+    dust.forEach((dot) => {
+      dot.angle += dot.speed * (isHover ? 1.8 : 1);
+
+      const x = mouse.x + Math.cos(dot.angle + dot.offset) * dot.radius;
+      const y = mouse.y + Math.sin(dot.angle) * dot.radius * 0.72;
+      const alpha = (isHover ? 0.3 : 0.18) + Math.sin(dot.angle * 2) * 0.06;
+      const size = isHover ? 1.2 : 0.9;
+
+      ctx.fillStyle = "rgba(152, 195, 126, " + alpha + ")";
+      ctx.beginPath();
+      ctx.arc(x, y, size, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  }
+
+  function drawCore() {
+    ctx.fillStyle = isHover ? "rgba(73, 144, 62, 0.88)" : "rgba(73, 144, 62, 0.72)";
+    ctx.beginPath();
+    ctx.arc(mouse.x, mouse.y, isHover ? 3.2 : 2.6, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+    if (!isVisible) {
+      frame = requestAnimationFrame(animate);
+      return;
+    }
+
+    trail.forEach((point, index) => {
+      const target = index === 0 ? mouse : trail[index - 1];
+      const ease = index === 0 ? 0.52 : 0.46;
+
+      point.x += (target.x - point.x) * ease;
+      point.y += (target.y - point.y) * ease;
+    });
+
+    drawLine();
+    drawDots();
+    drawDust();
+    drawCore();
+
+    frame = requestAnimationFrame(animate);
   }
 
   function showCursor() {
-    cursor.style.opacity = "1";
-    dot.style.opacity = "1";
+    isVisible = true;
+    canvas.style.opacity = "1";
   }
 
   function hideCursor() {
-    cursor.style.opacity = "0";
-    dot.style.opacity = "0";
+    isVisible = false;
+    canvas.style.opacity = "0";
   }
 
   function moveCursor(event) {
-    targetX = event.clientX;
-    targetY = event.clientY;
+    mouse.x = event.clientX;
+    mouse.y = event.clientY;
     showCursor();
   }
 
@@ -782,27 +883,30 @@ function startSiteCursor() {
   window.addEventListener("blur", hideCursor);
 
   document.addEventListener("mouseover", (event) => {
-    if (event.target instanceof Element && event.target.closest(hoverTargets)) {
-      cursor.classList.add("is-hover");
+    if (event.target instanceof Element && event.target.closest("a, button, input, canvas, .element, .plant")) {
+      isHover = true;
     }
   });
 
   document.addEventListener("mouseout", (event) => {
-    if (event.target instanceof Element && event.target.closest(hoverTargets)) {
-      cursor.classList.remove("is-hover");
+    if (event.target instanceof Element && event.target.closest("a, button, input, canvas, .element, .plant")) {
+      isHover = false;
     }
   });
 
-  raf = requestAnimationFrame(tick);
+  window.addEventListener("resize", makeCursor);
+
+  makeCursor();
+  frame = requestAnimationFrame(animate);
 
   window.addEventListener("beforeunload", () => {
-    cancelAnimationFrame(raf);
+    cancelAnimationFrame(frame);
   });
 }
 
-startLogoAnimation();
-startClimateScreen();
-startCatalogCards();
-startPlantBuilder();
-startScreen5Grow();
-startSiteCursor();
+startLogo();
+startClimate();
+startCards();
+startBuildPlant();
+startGrowFlowers();
+startCursor();

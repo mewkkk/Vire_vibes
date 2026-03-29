@@ -6,41 +6,41 @@
     <title>VIRE</title>
     <link rel="stylesheet" href="stylesheets/reset.css" />
     <link rel="stylesheet" href="stylesheets/layout.css" />
-    <link rel="stylesheet" href="stylesheets/style.css" />
     <link rel="stylesheet" href="stylesheets/adaptive.css" />
   </head>
   <body>
+    <canvas class="cursor_swarm" id="cursor_swarm" aria-hidden="true"></canvas>
+
     <main class="page">
       <!-- screen1: logo -->
       <section class="screen1" id="screen1">
-        <div class="screen1__light"></div>
         <img
           class="screen1__vine"
           src="assets/screen1/download (23) 1.svg"
           alt="Фотография лиан"
         />
 
-        <div class="screen1__glow screen1__glow--one"></div>
-        <div class="screen1__glow screen1__glow--two"></div>
-        <div class="screen1__glow screen1__glow--three"></div>
+        <div class="screen1__glow glow_one"></div>
+        <div class="screen1__glow glow_two"></div>
+        <div class="screen1__glow glow_three"></div>
 
         <img
-          class="screen1__line screen1__line--left"
+          class="screen1__line line_left"
           src="assets/screen1/Group 111.svg"
           alt="Декоративная левая линия"
         />
         <img
-          class="screen1__line screen1__line--right"
+          class="screen1__line line_right"
           src="assets/screen1/Group 112.svg"
           alt="Декоративная правая линия"
         />
 
         <div class="screen1__content">
           <div class="logo" id="logo">
-            <h1 class="logo_text sr-only">VIRE</h1>
+            <h1 class="sr-only">VIRE</h1>
             <canvas
-              class="logo_animation"
-              id="logo_animation"
+              class="logo_canvas"
+              id="logo_canvas"
               aria-hidden="true"
             ></canvas>
           </div>
@@ -51,11 +51,11 @@
 
       <!-- screen2: climate -->
       <section class="screen2" id="screen2">
-        <div class="screen2__glow screen2__glow--left"></div>
-        <div class="screen2__glow screen2__glow--right"></div>
+        <div class="screen2__glow glow_left"></div>
+        <div class="screen2__glow glow_right"></div>
 
-        <div class="screen2__rings screen2__rings--left"></div>
-        <div class="screen2__rings screen2__rings--right"></div>
+        <div class="screen2__rings rings_left"></div>
+        <div class="screen2__rings rings_right"></div>
 
         <div class="screen2__icons" aria-hidden="true">
           <img src="assets/screen2/Ellipse 81.svg" alt="" />
@@ -68,33 +68,33 @@
           <h2 class="screen2__title">Настрой свой климат</h2>
           <div class="screen2__title_lines">
             <img
-              class="screen2__title_line screen2__title_line--cool"
+              class="screen2__title_line line_cool"
               src="assets/screen2/Vector 311.svg"
               alt=""
             />
             <img
-              class="screen2__title_line screen2__title_line--warm"
+              class="screen2__title_line line_warm"
               src="assets/screen2/Vector 312.svg"
               alt=""
             />
           </div>
         </div>
 
-        <div class="plant_box">
+        <div class="screen2__plant">
           <canvas
-            class="plant_canvas"
-            id="plant_canvas"
+            class="screen2__canvas"
+            id="screen2_canvas"
             aria-label="Интерактивный фрактал климата"
           ></canvas>
         </div>
 
         <div class="screen2__controls">
-          <div class="screen2__slider screen2__slider--water">
+          <div class="screen2__slider">
             <div class="screen2__slider_row">
               <span>сухо</span>
               <input
                 class="screen2__range"
-                id="water_slider"
+                id="humidity_slider"
                 type="range"
                 min="0"
                 max="100"
@@ -104,12 +104,12 @@
             </div>
           </div>
 
-          <div class="screen2__slider screen2__slider--heat">
+          <div class="screen2__slider">
             <div class="screen2__slider_row">
               <span>холодно</span>
               <input
                 class="screen2__range"
-                id="heat_slider"
+                id="temperature_slider"
                 type="range"
                 min="0"
                 max="100"
@@ -128,23 +128,23 @@
         <div class="screen3__top">
           <div class="screen3__title_lines">
             <img
-              class="screen3__title_line screen3__title_line--top"
+              class="screen3__title_line line_top"
               src="assets/screen2/Vector 312.svg"
               alt=""
             />
             <img
-              class="screen3__title_line screen3__title_line--middle"
+              class="screen3__title_line line_middle"
               src="assets/screen2/Vector 311.svg"
               alt=""
             />
             <h2 class="screen3__title">Изучи ассортимент</h2>
             <img
-              class="screen3__title_line screen3__title_line--bottom"
+              class="screen3__title_line line_bottom"
               src="assets/screen2/Vector 311.svg"
               alt=""
             />
             <img
-              class="screen3__title_line screen3__title_line--accent"
+              class="screen3__title_line line_accent"
               src="assets/screen2/Vector 312.svg"
               alt=""
             />
@@ -157,77 +157,53 @@
           alt=""
         />
 
-        <div class="plants" id="plants_box">
+        <div class="screen3__plants" id="screen3_plants">
           <article
             class="plant plant1"
-            data-card-name="SPORA-N4"
-            data-card-text="Нейтральный баланс"
-            data-card-src="assets/screen3/Group 129.svg"
-            data-card-side="right"
             tabindex="0"
           >
             <img src="assets/screen3/download (44) 2.png" alt="Голубое растение слева" />
-            <img class="plant_card plant_card--right" src="assets/screen3/Group 129.svg" alt="Карточка растения SPORA-N4" />
+            <img class="plant_card card_right" src="assets/screen3/Group 129.svg" alt="Карточка растения SPORA-N4" />
           </article>
 
           <article
             class="plant plant2"
-            data-card-name="FILUM-A3"
-            data-card-text="Сухая фильтрация"
-            data-card-src="assets/screen3/Group 134.svg"
-            data-card-side="right"
             tabindex="0"
           >
             <img src="assets/screen3/download (41) 2.png" alt="Сухоцвет слева" />
-            <img class="plant_card plant_card--right" src="assets/screen3/Group 134.svg" alt="Карточка растения FILUM-A3" />
+            <img class="plant_card card_right" src="assets/screen3/Group 134.svg" alt="Карточка растения FILUM-A3" />
           </article>
 
           <article
             class="plant plant3"
-            data-card-name="HELIA-T5"
-            data-card-text="Тёплый климат"
-            data-card-src="assets/screen3/Group 130.svg"
-            data-card-side="right"
             tabindex="0"
           >
             <img src="assets/screen3/download (46) 3.png" alt="Оранжевый гербарий слева" />
-            <img class="plant_card plant_card--right" src="assets/screen3/Group 130.svg" alt="Карточка растения HELIA-T5" />
+            <img class="plant_card card_right" src="assets/screen3/Group 130.svg" alt="Карточка растения HELIA-T5" />
           </article>
 
           <article
             class="plant plant4"
-            data-card-name="SOLIS-T6"
-            data-card-text="Тепловая стабилизация"
-            data-card-src="assets/screen3/Group 131.svg"
-            data-card-side="left"
             tabindex="0"
           >
             <img src="assets/screen3/download (47) 2.png" alt="Оранжевый гербарий справа" />
-            <img class="plant_card plant_card--left" src="assets/screen3/Group 131.svg" alt="Карточка растения SOLIS-T6" />
+            <img class="plant_card card_left" src="assets/screen3/Group 131.svg" alt="Карточка растения SOLIS-T6" />
           </article>
 
           <article
             class="plant plant5"
-            data-card-name="AERIS-L1"
-            data-card-text="Холодная стабилизация"
-            data-card-src="assets/screen3/Group 132.svg"
-            data-card-side="left"
             tabindex="0"
           >
             <img src="assets/screen3/download (38) 2.png" alt="Голубые цветы справа" />
-            <img class="plant_card plant_card--left" src="assets/screen3/Group 132.svg" alt="Карточка растения AERIS-L1" />
+            <img class="plant_card card_left" src="assets/screen3/Group 132.svg" alt="Карточка растения AERIS-L1" />
           </article>
 
           <article
             class="plant plant6"
-            data-card-name="NUBIS-V2"
-            data-card-text="Регуляция влажности"
-            data-card-src="assets/screen3/Group 133.svg"
-            data-card-side="left"
             tabindex="0"
           >
             <img src="assets/screen3/download (37) 2.png" alt="Сухоцвет справа" />
-            <img class="plant_card plant_card--left" src="assets/screen3/Group 133.svg" alt="Карточка растения NUBIS-V2" />
+            <img class="plant_card card_left" src="assets/screen3/Group 133.svg" alt="Карточка растения NUBIS-V2" />
           </article>
         </div>
       </section>
@@ -238,12 +214,12 @@
           <div class="screen4__title_box">
             <h2 class="screen4__title">Создай свое растение</h2>
             <img
-              class="screen4__title_line screen4__title_line--green"
+              class="screen4__title_line line_green"
               src="assets/screen4/Vector 316.svg"
               alt=""
             />
             <img
-              class="screen4__title_line screen4__title_line--orange"
+              class="screen4__title_line line_orange"
               src="assets/screen4/Vector 317.svg"
               alt=""
             />
@@ -251,8 +227,8 @@
 
           <div class="screen4__buttons">
             <button
-              class="screen4__button restart_button"
-              id="restart_button"
+              class="screen4__button screen4__reset"
+              id="screen4_reset"
               type="button"
               aria-label="Начать заново"
             >
@@ -260,7 +236,7 @@
             </button>
 
             <button
-              class="screen4__button help_button"
+              class="screen4__button screen4__help"
               type="button"
               aria-label="Подсказка"
             >
@@ -269,93 +245,87 @@
           </div>
         </div>
 
-        <div class="screen4__area" id="screen4_area">
+        <div class="screen4__stage">
           <img
-            class="screen4__side_line screen4__side_line--left"
+            class="screen4__side_line side_left"
             src="assets/screen4/Vector 334.svg"
             alt=""
           />
           <img
-            class="screen4__side_line screen4__side_line--right"
+            class="screen4__side_line side_right"
             src="assets/screen4/Vector 335.svg"
             alt=""
           />
 
-          <div class="elements elements--left">
+          <div class="elements panel_left">
             <button
-              class="element element--big"
+              class="element element_big"
               type="button"
-              data-tool-id="vector-four"
             >
               <img src="assets/screen4/Vector-4.svg" alt="Элемент 1" draggable="false" />
             </button>
 
             <button
-              class="element element--small"
+              class="element"
               type="button"
-              data-tool-id="group-main"
             >
               <img src="assets/screen4/Group.svg" alt="Элемент 2" draggable="false" />
             </button>
 
             <button
-              class="element element--small"
+              class="element"
               type="button"
-              data-tool-id="vector-one"
             >
               <img src="assets/screen4/Vector-1.svg" alt="Элемент 3" draggable="false" />
             </button>
           </div>
 
-          <div class="elements elements--right">
+          <div class="elements panel_right">
             <button
-              class="element element--big"
+              class="element element_big"
               type="button"
-              data-tool-id="vector-main"
             >
               <img src="assets/screen4/Vector.svg" alt="Элемент 4" draggable="false" />
             </button>
 
             <button
-              class="element element--small"
+              class="element"
               type="button"
-              data-tool-id="vector-two"
             >
               <img src="assets/screen4/Vector-2.svg" alt="Элемент 5" draggable="false" />
             </button>
 
             <button
-              class="element element--small"
+              class="element"
               type="button"
-              data-tool-id="vector-three"
             >
               <img src="assets/screen4/Vector-3.svg" alt="Элемент 6" draggable="false" />
             </button>
           </div>
 
           <div class="screen4__center">
-            <div class="elements_drop" id="elements_drop">
+            <div class="screen4__drop_zone" id="screen4_drop_zone">
               <img
-                class="drop_circle"
+                class="screen4__drop_circle"
                 src="assets/screen4/Ellipse 102.svg"
                 alt=""
               />
-              <div class="drop_text">
+              <div class="screen4__drop_text">
                 <p>Перетащи элементы</p>
                 <p>в круг</p>
               </div>
-              <div class="elements_preview" id="elements_preview"></div>
+              <div class="screen4__preview" id="screen4_preview"></div>
             </div>
 
-            <div class="plant_result" id="plant_result" aria-live="polite">
+            <div class="screen4__plant_box" id="screen4_plant_box" aria-live="polite">
               <img
-                class="plant_base"
+                class="screen4__plant_base"
                 src="assets/screen4/Bazaart (5) 2.svg"
                 alt=""
               />
-              <div class="plant_rising_box">
+              <div class="screen4__plant_mask">
                 <img
-                  class="plant_rising"
+                  class="screen4__plant_image"
                   src="assets/screen4/download (46) 2.svg"
                   alt="Созданное растение"
                 />
@@ -368,29 +338,29 @@
       <!-- screen5: grow flower -->
       <section class="screen5" id="screen5">
         <div class="screen5__top">
-          <div class="screen5__line_group screen5__line_group--left" aria-hidden="true">
-            <img class="screen5__line screen5__line--green" src="assets/screen5/Vector 322.svg" alt="" />
-            <img class="screen5__line screen5__line--orange" src="assets/screen5/Vector 323.svg" alt="" />
+          <div class="screen5__line_group group_left" aria-hidden="true">
+            <img class="screen5__line line_green" src="assets/screen5/Vector 322.svg" alt="" />
+            <img class="screen5__line line_orange" src="assets/screen5/Vector 323.svg" alt="" />
           </div>
 
           <h2 class="screen5__title">Вырасти свой цветок</h2>
 
-          <div class="screen5__line_group screen5__line_group--right" aria-hidden="true">
-            <img class="screen5__line screen5__line--green" src="assets/screen5/Vector 326.svg" alt="" />
-            <img class="screen5__line screen5__line--orange" src="assets/screen5/Vector 327.svg" alt="" />
+          <div class="screen5__line_group group_right" aria-hidden="true">
+            <img class="screen5__line line_green" src="assets/screen5/Vector 326.svg" alt="" />
+            <img class="screen5__line line_orange" src="assets/screen5/Vector 327.svg" alt="" />
           </div>
 
           <button class="screen5__question" type="button" aria-label="Подсказка">?</button>
         </div>
 
-        <div class="screen5__garden" id="screen5_garden">
+        <div class="screen5__stage">
           <img
-            class="screen5__field"
-            id="screen5_field"
+            class="screen5__ground"
+            id="screen5_ground"
             src="assets/screen5/download (20) 1.svg"
             alt="Поле для выращивания цветка"
           />
-          <div class="screen5__plants" id="screen5_plants" aria-live="polite"></div>
+          <div class="screen5__flowers" id="screen5_flowers" aria-live="polite"></div>
         </div>
       </section>
     </main>

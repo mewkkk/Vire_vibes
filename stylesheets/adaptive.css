@@ -1,6 +1,16 @@
 @media (max-width: 1024px) {
+  .screen1,
+  .screen2,
+  .screen3,
+  .screen4,
+  .screen5 {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
   .screen1 {
-    padding: 24px 24px 34px;
+    padding-top: 24px;
+    padding-bottom: 34px;
   }
 
   .logo {
@@ -13,26 +23,27 @@
 
   .screen1__vine {
     top: -3%;
-    width: 136vw;
+    width: 128vw;
   }
 
-  .screen1__line--left {
+  .screen1__line.line_left {
     left: 18px;
   }
 
-  .screen1__line--right {
+  .screen1__line.line_right {
     right: 18px;
   }
 
   .screen2 {
-    padding: 36px 24px 42px;
+    padding-top: 36px;
+    padding-bottom: 42px;
   }
 
   .screen2__title {
     font-size: 32px;
   }
 
-  .plant_box {
+  .screen2__plant {
     height: min(56vh, 620px);
   }
 
@@ -45,7 +56,8 @@
   }
 
   .screen3 {
-    padding: 28px 24px 40px;
+    padding-top: 28px;
+    padding-bottom: 40px;
   }
 
   .screen3__question {
@@ -55,7 +67,7 @@
   .screen2__question,
   .screen3__question,
   .screen5__question,
-  .screen4__button.help_button {
+  .screen4__help {
     width: 30px;
     height: 30px;
   }
@@ -68,10 +80,10 @@
 
   .screen3__back {
     top: 108px;
-    min-width: 1024px;
+    min-width: 1020px;
   }
 
-  .plants {
+  .screen3__plants {
     height: 706px;
   }
 
@@ -114,26 +126,18 @@
 
   .plant_card {
     width: 248px;
-    height: auto;
-  }
-
-  .plant_card--right {
-    left: calc(100% + 2px);
-  }
-
-  .plant_card--left {
-    right: calc(100% + 2px);
   }
 
   .screen4 {
-    padding: 28px 24px 38px;
+    padding-top: 28px;
+    padding-bottom: 38px;
   }
 
   .screen4__buttons {
     right: 4px;
   }
 
-  .screen4__area {
+  .screen4__stage {
     height: 700px;
   }
 
@@ -143,15 +147,14 @@
   }
 
   .elements {
-    top: 0;
     width: 150px;
   }
 
-  .elements--left {
+  .elements.panel_left {
     left: -3px;
   }
 
-  .elements--right {
+  .elements.panel_right {
     right: -3px;
   }
 
@@ -160,18 +163,18 @@
     height: 138px;
   }
 
-  .elements--left .element:nth-child(1),
-  .elements--right .element:nth-child(1) {
+  .elements.panel_left .element:nth-child(1),
+  .elements.panel_right .element:nth-child(1) {
     top: 122px;
   }
 
-  .elements--left .element:nth-child(2),
-  .elements--right .element:nth-child(2) {
+  .elements.panel_left .element:nth-child(2),
+  .elements.panel_right .element:nth-child(2) {
     top: 304px;
   }
 
-  .elements--left .element:nth-child(3),
-  .elements--right .element:nth-child(3) {
+  .elements.panel_left .element:nth-child(3),
+  .elements.panel_right .element:nth-child(3) {
     top: 492px;
   }
 
@@ -180,7 +183,7 @@
     max-height: 102px;
   }
 
-  .element--big img {
+  .element.element_big img {
     max-width: 112px;
     max-height: 112px;
   }
@@ -189,30 +192,31 @@
     inset: 104px 170px 0;
   }
 
-  .elements_drop {
+  .screen4__drop_zone {
     width: min(410px, 44vw);
   }
 
-  .drop_text {
+  .screen4__drop_text {
     font-size: 21px;
   }
 
-  .drop_text p:last-child {
+  .screen4__drop_text p:last-child {
     font-size: 18px;
   }
 
-  .plant_result {
+  .screen4__plant_box {
     width: min(680px, 72vw);
     height: 500px;
   }
 
-  .plant_rising {
-    width: min(320px, 46%);
-    bottom: 44px;
+  .screen4__plant_mask {
+    width: min(280px, 40%);
+    bottom: 74px;
   }
 
   .screen5 {
-    padding: 24px 24px 36px;
+    padding-top: 24px;
+    padding-bottom: 36px;
   }
 
   .screen5__title {
@@ -229,17 +233,16 @@
     top: 56px;
   }
 
-  .screen5__garden {
+  .screen5__stage {
     height: min(66vh, 640px);
     margin-top: 30px;
   }
 
-  .screen5__field {
-    width: 100vw;
-    bottom: -14%;
+  .screen5__ground {
+    bottom: -12%;
   }
 
-  .screen5_plant {
+  .screen5__flower {
     width: 176px;
   }
 
@@ -248,17 +251,27 @@
   .screen2__slider_row span,
   .screen3__title,
   .screen4__title,
-  .drop_text,
-  .drop_text p:last-child,
+  .screen4__drop_text,
+  .screen4__drop_text p:last-child,
   .screen5__title {
-    font-size: 24px;
+    font-size: 22px;
   }
 }
 
 @media (max-width: 768px) {
+  .screen1,
+  .screen2,
+  .screen3,
+  .screen4,
+  .screen5 {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
   .screen1 {
     min-height: 100svh;
-    padding: 20px 16px 30px;
+    padding-top: 20px;
+    padding-bottom: 30px;
   }
 
   .screen1__content {
@@ -272,7 +285,7 @@
 
   .screen1__subtitle {
     max-width: 290px;
-    font-size: 19px;
+    font-size: 18px;
     line-height: 1.2;
   }
 
@@ -281,24 +294,24 @@
     width: 44px;
   }
 
-  .screen1__glow--one {
-    width: 360px;
-    height: 360px;
-    left: -42px;
+  .screen1__glow.glow_one {
+    width: 340px;
+    height: 340px;
+    left: -40px;
   }
 
-  .screen1__glow--two {
-    width: 310px;
-    height: 310px;
-    right: -38px;
-    bottom: 20%;
+  .screen1__glow.glow_two {
+    width: 290px;
+    height: 290px;
+    right: -34px;
+    bottom: 18%;
   }
 
-  .screen1__glow--three {
-    width: 220px;
-    height: 220px;
+  .screen1__glow.glow_three {
+    width: 210px;
+    height: 210px;
     top: 55%;
-    right: 18%;
+    right: 16%;
   }
 
   .screen1__vine {
@@ -308,7 +321,8 @@
 
   .screen2 {
     min-height: auto;
-    padding: 32px 16px 32px;
+    padding-top: 32px;
+    padding-bottom: 32px;
   }
 
   .screen2__top {
@@ -325,16 +339,16 @@
     height: 36px;
   }
 
-  .screen2__title_line--cool {
+  .screen2__title_line.line_cool {
     width: 220px;
   }
 
-  .screen2__title_line--warm {
+  .screen2__title_line.line_warm {
     width: 160px;
   }
 
-  .plant_box {
-    height: 420px;
+  .screen2__plant {
+    height: 410px;
     margin-top: 20px;
     margin-bottom: 12px;
   }
@@ -354,7 +368,7 @@
   }
 
   .screen2__slider_row span {
-    font-size: 21px;
+    font-size: 20px;
   }
 
   .screen2__glow,
@@ -362,13 +376,13 @@
     width: 112vw;
   }
 
-  .screen2__glow--left,
-  .screen2__rings--left {
+  .screen2__glow.glow_left,
+  .screen2__rings.rings_left {
     left: 0;
   }
 
-  .screen2__glow--right,
-  .screen2__rings--right {
+  .screen2__glow.glow_right,
+  .screen2__rings.rings_right {
     right: 0;
   }
 
@@ -384,7 +398,8 @@
   }
 
   .screen3 {
-    padding: 24px 16px 32px;
+    padding-top: 24px;
+    padding-bottom: 32px;
   }
 
   .screen3__question {
@@ -392,8 +407,12 @@
     right: 16px;
   }
 
+  .screen3__top {
+    margin-top: 132px;
+  }
+
   .screen3__back {
-    top: 134px;
+    top: 138px;
     min-width: 860px;
   }
 
@@ -407,12 +426,12 @@
     font-size: 24px;
   }
 
-  .screen3__title_line--middle,
-  .screen3__title_line--bottom {
+  .screen3__title_line.line_middle,
+  .screen3__title_line.line_bottom {
     width: 260px;
   }
 
-  .plants {
+  .screen3__plants {
     height: 590px;
   }
 
@@ -461,20 +480,25 @@
     right: 132px;
   }
 
-  .plant_card {
-    width: 180px;
+  .plant_card,
+  .plant_card.card_left,
+  .plant_card.card_right {
+    position: fixed;
+    top: auto;
+    left: 50%;
+    right: auto;
+    bottom: 18px;
+    width: min(78vw, 240px);
+    transform: translateX(-50%) scale(0.95);
   }
 
-  .plant_card--right {
-    left: calc(100% + 2px);
-  }
-
-  .plant_card--left {
-    right: calc(100% + 2px);
+  .plant.is-active .plant_card {
+    transform: translateX(-50%) scale(1);
   }
 
   .screen4 {
-    padding: 24px 16px 32px;
+    padding-top: 24px;
+    padding-bottom: 32px;
   }
 
   .screen4__title_box {
@@ -486,12 +510,12 @@
     font-size: 24px;
   }
 
-  .screen4__title_line--green {
+  .screen4__title_line.line_green {
     top: 38px;
     width: 224px;
   }
 
-  .screen4__title_line--orange {
+  .screen4__title_line.line_orange {
     top: 60px;
     width: 160px;
   }
@@ -510,7 +534,7 @@
   .screen2__question,
   .screen3__question,
   .screen5__question,
-  .screen4__button.help_button {
+  .screen4__help {
     width: 26px;
     height: 26px;
   }
@@ -521,8 +545,8 @@
     font-size: 16px;
   }
 
-  .screen4__area {
-    height: 620px;
+  .screen4__stage {
+    height: 640px;
     margin-top: 16px;
   }
 
@@ -532,15 +556,14 @@
   }
 
   .elements {
-    top: 0;
     width: 108px;
   }
 
-  .elements--left {
+  .elements.panel_left {
     left: 10px;
   }
 
-  .elements--right {
+  .elements.panel_right {
     right: 10px;
   }
 
@@ -549,18 +572,18 @@
     height: 102px;
   }
 
-  .elements--left .element:nth-child(1),
-  .elements--right .element:nth-child(1) {
+  .elements.panel_left .element:nth-child(1),
+  .elements.panel_right .element:nth-child(1) {
     top: 126px;
   }
 
-  .elements--left .element:nth-child(2),
-  .elements--right .element:nth-child(2) {
+  .elements.panel_left .element:nth-child(2),
+  .elements.panel_right .element:nth-child(2) {
     top: 250px;
   }
 
-  .elements--left .element:nth-child(3),
-  .elements--right .element:nth-child(3) {
+  .elements.panel_left .element:nth-child(3),
+  .elements.panel_right .element:nth-child(3) {
     top: 380px;
   }
 
@@ -569,7 +592,7 @@
     max-height: 78px;
   }
 
-  .element--big img {
+  .element.element_big img {
     max-width: 86px;
     max-height: 86px;
   }
@@ -578,40 +601,42 @@
     inset: 120px 118px 0;
   }
 
-  .elements_drop {
+  .screen4__drop_zone {
     width: min(320px, 48vw);
   }
 
-  .drop_text {
+  .screen4__drop_text {
     gap: 18px;
     font-size: 18px;
   }
 
-  .drop_text p:last-child {
+  .screen4__drop_text p:last-child {
     font-size: 16px;
   }
 
-  .element_preview {
+  .screen4__preview_item {
     width: 56px;
   }
 
-  .plant_result {
+  .screen4__plant_box {
     width: min(520px, 74vw);
     height: 420px;
   }
 
-  .plant_base {
+  .screen4__plant_base {
     width: min(580px, 100%);
+    bottom: -58px;
   }
 
-  .plant_rising {
-    width: min(248px, 52%);
-    bottom: 30px;
+  .screen4__plant_mask {
+    width: min(214px, 46%);
+    bottom: 64px;
   }
 
   .screen5 {
     min-height: auto;
-    padding: 24px 16px 30px;
+    padding-top: 24px;
+    padding-bottom: 30px;
   }
 
   .screen5__top {
@@ -620,7 +645,7 @@
 
   .screen5__title {
     margin-top: 36px;
-    font-size: 32px;
+    font-size: 30px;
     text-align: center;
   }
 
@@ -629,7 +654,7 @@
     height: 56px;
   }
 
-  .screen5__line--orange {
+  .screen5__line.line_orange {
     top: 20px;
   }
 
@@ -638,18 +663,17 @@
     right: 0;
   }
 
-  .screen5__garden {
-    height: 460px;
+  .screen5__stage {
+    height: 440px;
     margin-top: 30px;
   }
 
-  .screen5__field {
-    width: 100vw;
-    bottom: -12%;
+  .screen5__ground {
+    bottom: -8%;
   }
 
-  .screen5_plant {
-    width: 144px;
+  .screen5__flower {
+    width: 138px;
   }
 
   .screen1__subtitle,
@@ -657,37 +681,73 @@
   .screen2__slider_row span,
   .screen3__title,
   .screen4__title,
-  .drop_text,
-  .drop_text p:last-child,
+  .screen4__drop_text,
+  .screen4__drop_text p:last-child,
   .screen5__title {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 
 @media (max-width: 520px) {
+  .screen1,
+  .screen2,
+  .screen3,
+  .screen4,
+  .screen5 {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .screen1 {
+    padding-top: 18px;
+    padding-bottom: 24px;
+  }
+
   .logo {
-    width: calc(100vw - 44px);
+    width: calc(100vw - 36px);
+    height: clamp(118px, 34vw, 170px);
   }
 
   .screen1__vine {
-    top: -3%;
-    width: 188vw;
+    top: -2%;
+    width: 180vw;
   }
 
   .screen1__line {
     width: 34px;
   }
 
-  .screen1__line--left {
+  .screen1__line.line_left {
     left: 8px;
   }
 
-  .screen1__line--right {
+  .screen1__line.line_right {
     right: 8px;
   }
 
   .screen1__subtitle {
+    max-width: 240px;
     font-size: 16px;
+  }
+
+  .screen1__glow.glow_one {
+    width: 280px;
+    height: 280px;
+  }
+
+  .screen1__glow.glow_two {
+    width: 240px;
+    height: 240px;
+  }
+
+  .screen1__glow.glow_three {
+    width: 170px;
+    height: 170px;
+  }
+
+  .screen2 {
+    padding-top: 28px;
+    padding-bottom: 28px;
   }
 
   .screen2__title {
@@ -695,8 +755,20 @@
     font-size: 22px;
   }
 
-  .plant_box {
-    height: 340px;
+  .screen2__title_lines {
+    width: 220px;
+  }
+
+  .screen2__title_line.line_cool {
+    width: 204px;
+  }
+
+  .screen2__title_line.line_warm {
+    width: 144px;
+  }
+
+  .screen2__plant {
+    height: 320px;
   }
 
   .screen2__slider_row {
@@ -704,7 +776,43 @@
   }
 
   .screen2__slider_row span {
-    font-size: 17px;
+    font-size: 16px;
+  }
+
+  .screen2__range::-webkit-slider-thumb {
+    width: 18px;
+    height: 18px;
+    margin-top: -7px;
+  }
+
+  .screen2__range::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+  }
+
+  .screen2__icons {
+    top: 76px;
+    right: 10px;
+    gap: 10px;
+  }
+
+  .screen2__glow,
+  .screen2__rings {
+    width: 122vw;
+  }
+
+  .screen3 {
+    padding-top: 22px;
+    padding-bottom: 30px;
+  }
+
+  .screen3__question {
+    top: 18px;
+    right: 12px;
+  }
+
+  .screen3__top {
+    margin-top: 146px;
   }
 
   .screen3__title_lines {
@@ -717,23 +825,23 @@
     font-size: 19px;
   }
 
-  .screen3__title_line--top,
-  .screen3__title_line--accent {
+  .screen3__title_line.line_top,
+  .screen3__title_line.line_accent {
     width: 146px;
   }
 
-  .screen3__title_line--middle,
-  .screen3__title_line--bottom {
+  .screen3__title_line.line_middle,
+  .screen3__title_line.line_bottom {
     width: 214px;
   }
 
   .screen3__back {
-    top: 138px;
+    top: 152px;
     min-width: 640px;
   }
 
-  .plants {
-    height: 472px;
+  .screen3__plants {
+    height: 468px;
   }
 
   .plant1,
@@ -773,136 +881,135 @@
     right: 82px;
   }
 
-  .plant_card {
-    width: 122px;
-  }
-
-  .plant_card--right {
-    left: calc(100% + 2px);
-  }
-
-  .plant_card--left {
-    right: calc(100% + 2px);
+  .plant_card,
+  .plant_card.card_left,
+  .plant_card.card_right {
+    bottom: 12px;
+    width: min(84vw, 216px);
   }
 
   .screen4__title_box {
-    width: 248px;
-    height: 96px;
+    width: 238px;
+    height: 92px;
   }
 
   .screen4__title {
     font-size: 20px;
   }
 
-  .screen4__title_line--green {
-    width: 198px;
+  .screen4__title_line.line_green {
+    width: 188px;
   }
 
-  .screen4__title_line--orange {
-    width: 138px;
+  .screen4__title_line.line_orange {
+    width: 132px;
   }
 
-  .screen4__area {
-    height: 540px;
+  .screen4__stage {
+    height: 560px;
   }
 
   .screen4__side_line {
-    width: 110px;
-    top: 132px;
+    width: 100px;
+    top: 140px;
   }
 
   .elements {
-    top: 0;
-    width: 76px;
+    width: 72px;
   }
 
-  .elements--left {
-    left: 12px;
+  .elements.panel_left {
+    left: 8px;
   }
 
-  .elements--right {
-    right: 12px;
+  .elements.panel_right {
+    right: 8px;
   }
 
   .element {
-    width: 76px;
-    height: 82px;
+    width: 72px;
+    height: 80px;
   }
 
-  .elements--left .element:nth-child(1),
-  .elements--right .element:nth-child(1) {
-    top: 132px;
+  .elements.panel_left .element:nth-child(1),
+  .elements.panel_right .element:nth-child(1) {
+    top: 138px;
   }
 
-  .elements--left .element:nth-child(2),
-  .elements--right .element:nth-child(2) {
-    top: 212px;
+  .elements.panel_left .element:nth-child(2),
+  .elements.panel_right .element:nth-child(2) {
+    top: 220px;
   }
 
-  .elements--left .element:nth-child(3),
-  .elements--right .element:nth-child(3) {
-    top: 296px;
+  .elements.panel_left .element:nth-child(3),
+  .elements.panel_right .element:nth-child(3) {
+    top: 304px;
   }
 
   .element img {
-    max-width: 58px;
-    max-height: 58px;
+    max-width: 56px;
+    max-height: 56px;
   }
 
-  .element--big img {
-    max-width: 64px;
-    max-height: 64px;
+  .element.element_big img {
+    max-width: 62px;
+    max-height: 62px;
   }
 
   .screen4__center {
-    inset: 134px 76px 0;
+    inset: 146px 70px 0;
   }
 
-  .elements_drop {
-    width: min(246px, 56vw);
+  .screen4__drop_zone {
+    width: min(228px, 62vw);
   }
 
-  .drop_text {
+  .screen4__drop_text {
     gap: 14px;
-    font-size: 15px;
-  }
-
-  .drop_text p:last-child {
     font-size: 14px;
   }
 
-  .element_preview {
-    width: 42px;
+  .screen4__drop_text p:last-child {
+    font-size: 13px;
   }
 
-  .plant_result {
-    width: min(380px, 78vw);
-    height: 320px;
+  .screen4__preview_item {
+    width: 38px;
   }
 
-  .plant_rising {
-    width: min(176px, 54%);
-    bottom: 24px;
+  .screen4__plant_box {
+    width: min(350px, 80vw);
+    height: 300px;
+  }
+
+  .screen4__plant_mask {
+    width: min(144px, 52%);
+    bottom: 56px;
+  }
+
+  .screen5 {
+    padding-top: 24px;
+    padding-bottom: 26px;
   }
 
   .screen5__title {
     margin-top: 40px;
-    font-size: 24px;
+    font-size: 22px;
   }
 
   .screen5__line_group {
-    width: min(186px, 37vw);
-    height: 46px;
+    width: min(170px, 38vw);
+    height: 42px;
   }
 
-  .screen5__line--orange {
+  .screen5__line.line_orange {
     top: 16px;
   }
 
   .screen2__question,
   .screen3__question,
   .screen5__question,
-  .screen4__button.help_button {
+  .screen4__help {
     width: 26px;
     height: 26px;
   }
@@ -917,18 +1024,17 @@
     top: 58px;
   }
 
-  .screen5__garden {
-    height: 350px;
+  .screen5__stage {
+    height: 320px;
     margin-top: 24px;
   }
 
-  .screen5__field {
-    width: 100vw;
-    bottom: -10%;
+  .screen5__ground {
+    bottom: -6%;
   }
 
-  .screen5_plant {
-    width: 108px;
+  .screen5__flower {
+    width: 100px;
   }
 
   .screen1__subtitle,
@@ -936,9 +1042,9 @@
   .screen2__slider_row span,
   .screen3__title,
   .screen4__title,
-  .drop_text,
-  .drop_text p:last-child,
+  .screen4__drop_text,
+  .screen4__drop_text p:last-child,
   .screen5__title {
-    font-size: 16px;
+    font-size: 15px;
   }
 }

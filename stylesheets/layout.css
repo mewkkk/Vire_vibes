@@ -42,45 +42,16 @@ body {
     cursor: none;
   }
 
-  .site_cursor {
+  .cursor_swarm {
     position: fixed;
-    left: 0;
-    top: 0;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
     z-index: 12000;
-    width: 26px;
-    height: 26px;
-    border: 1.5px solid rgba(8, 63, 36, 0.72);
-    border-radius: 50%;
-    background:
-      radial-gradient(circle, rgba(165, 228, 140, 0.24) 0%, rgba(165, 228, 140, 0) 66%);
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    transition: width 0.24s ease, height 0.24s ease, border-color 0.24s ease, background 0.24s ease;
-    backdrop-filter: blur(1px);
+    mix-blend-mode: normal;
     opacity: 0;
-  }
-
-  .site_cursor_dot {
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 12001;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #f57c11;
-    box-shadow: 0 0 16px rgba(245, 124, 17, 0.45);
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    opacity: 0;
-  }
-
-  .site_cursor.is-hover {
-    width: 42px;
-    height: 42px;
-    border-color: rgba(73, 144, 62, 0.86);
-    background:
-      radial-gradient(circle, rgba(245, 124, 17, 0.16) 0%, rgba(245, 124, 17, 0) 68%);
+    transition: opacity 0.24s ease;
   }
 }
 
@@ -88,12 +59,6 @@ body {
   width: 100%;
   overflow: hidden;
 }
-
-/* naming:
-screen1, screen2, screen3, screen4
-logo, plant, elements_drop, plant_rising
-for new screens: screen5, screen6 and simple names like title, photo, button, plant
-*/
 
 /* screen1: logo */
 
@@ -124,7 +89,7 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   position: relative;
 }
 
-.logo_animation {
+.logo_canvas {
   width: 100%;
   height: 100%;
   cursor: crosshair;
@@ -148,16 +113,12 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   opacity: 0.96;
 }
 
-.screen1__line--left {
+.screen1__line.line_left {
   left: 34px;
 }
 
-.screen1__line--right {
+.screen1__line.line_right {
   right: 34px;
-}
-
-.screen1__light {
-  display: none;
 }
 
 .screen1__vine {
@@ -182,7 +143,7 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   background: radial-gradient(circle, rgba(189, 255, 164, 0.92) 0%, rgba(132, 218, 107, 0.48) 38%, rgba(132, 218, 107, 0) 76%);
 }
 
-.screen1__glow--one {
+.screen1__glow.glow_one {
   top: 18%;
   left: 11%;
   width: 560px;
@@ -190,7 +151,7 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   animation: orbMoveOne 6.5s ease-in-out infinite alternate;
 }
 
-.screen1__glow--two {
+.screen1__glow.glow_two {
   right: 7%;
   bottom: 11%;
   width: 490px;
@@ -198,13 +159,63 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   animation: orbMoveTwo 5.8s ease-in-out infinite alternate-reverse;
 }
 
-.screen1__glow--three {
+.screen1__glow.glow_three {
   top: 50%;
   right: 24%;
   width: 380px;
   height: 380px;
   opacity: 0.8;
   animation: orbMoveThree 4.9s ease-in-out infinite alternate;
+}
+
+.screen1::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(180deg, rgba(217, 227, 212, 0.18) 0%, rgba(247, 247, 242, 0) 30%),
+    linear-gradient(180deg, rgba(247, 247, 242, 0) 70%, rgba(247, 247, 242, 1) 100%);
+}
+
+.screen1::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 49%;
+  z-index: 0;
+  width: min(900px, 78vw);
+  height: min(900px, 78vw);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(193, 239, 169, 0.34) 0%, rgba(193, 239, 169, 0) 72%);
+  filter: blur(24px);
+}
+
+.screen1__content::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: -1;
+  width: min(980px, 96%);
+  height: clamp(240px, 34vw, 380px);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(203, 238, 182, 0.48) 0%, rgba(203, 238, 182, 0.16) 42%, rgba(203, 238, 182, 0) 78%);
+}
+
+.logo::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -14px;
+  width: 62%;
+  height: 42px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(20, 53, 28, 0.2) 0%, rgba(20, 53, 28, 0) 72%);
+  filter: blur(20px);
 }
 
 .sr-only {
@@ -328,17 +339,17 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   transform: translateX(-50%);
 }
 
-.screen2__title_line--cool {
+.screen2__title_line.line_cool {
   top: 0;
   width: 281px;
 }
 
-.screen2__title_line--warm {
+.screen2__title_line.line_warm {
   bottom: 0;
   width: 198px;
 }
 
-.plant_box {
+.screen2__plant {
   position: relative;
   z-index: 4;
   width: min(980px, 100%);
@@ -346,7 +357,7 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   margin: 24px auto 18px;
 }
 
-.plant_canvas {
+.screen2__canvas {
   width: 100%;
   height: 100%;
 }
@@ -437,12 +448,12 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   background: radial-gradient(circle, rgba(73, 144, 62, 0.68) 0%, rgba(73, 144, 62, 0.24) 36%, rgba(255, 255, 255, 0) 74%);
 }
 
-.screen2__glow--left {
+.screen2__glow.glow_left {
   left: 0;
   transform: translate(-50%, -50%);
 }
 
-.screen2__glow--right {
+.screen2__glow.glow_right {
   right: 0;
   transform: translate(50%, -50%);
 }
@@ -453,12 +464,12 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   background: repeating-radial-gradient(circle, transparent 0 28px, rgba(73, 144, 62, 0.46) 28px 32px);
 }
 
-.screen2__rings--left {
+.screen2__rings.rings_left {
   left: 0;
   transform: translate(-50%, -50%);
 }
 
-.screen2__rings--right {
+.screen2__rings.rings_right {
   right: 0;
   transform: translate(50%, -50%);
 }
@@ -553,22 +564,22 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   transform: translateX(-50%);
 }
 
-.screen3__title_line--top {
+.screen3__title_line.line_top {
   top: 0;
   width: 190px;
 }
 
-.screen3__title_line--middle {
+.screen3__title_line.line_middle {
   top: 24px;
   width: 320px;
 }
 
-.screen3__title_line--bottom {
+.screen3__title_line.line_bottom {
   top: 92px;
   width: 320px;
 }
 
-.screen3__title_line--accent {
+.screen3__title_line.line_accent {
   top: 116px;
   width: 190px;
 }
@@ -585,7 +596,7 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   color: var(--green-dark);
 }
 
-.plants {
+.screen3__plants {
   position: relative;
   z-index: 3;
   width: min(1260px, 100%);
@@ -609,11 +620,11 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   object-position: center bottom;
 }
 
-.plants:has(.plant:hover) .plant {
+.screen3__plants:has(.plant:hover) .plant {
   opacity: 0.3;
 }
 
-.plants:has(.plant:hover) .plant:hover {
+.screen3__plants:has(.plant:hover) .plant:hover {
   opacity: 1;
 }
 
@@ -625,11 +636,11 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   outline: none;
 }
 
-.plants.has-active .plant {
+.screen3__plants.has-active .plant {
   opacity: 0.3;
 }
 
-.plants.has-active .plant.is-active {
+.screen3__plants.has-active .plant.is-active {
   z-index: 12;
   opacity: 1;
 }
@@ -647,11 +658,11 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   filter: drop-shadow(0 14px 30px rgba(8, 63, 36, 0.08));
 }
 
-.plant_card--right {
+.plant_card.card_right {
   left: calc(100% + 2px);
 }
 
-.plant_card--left {
+.plant_card.card_left {
   right: calc(100% + 2px);
 }
 
@@ -746,12 +757,12 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   transform: translateX(-50%);
 }
 
-.screen4__title_line--green {
+.screen4__title_line.line_green {
   top: 42px;
   width: 288px;
 }
 
-.screen4__title_line--orange {
+.screen4__title_line.line_orange {
   top: 66px;
   width: 198px;
 }
@@ -781,20 +792,20 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   object-fit: contain;
 }
 
-.restart_button {
+.screen4__reset {
   opacity: 0;
   pointer-events: none;
   transform: translateY(-6px);
 }
 
-.screen4--active .restart_button,
-.screen4--grown .restart_button {
+.screen4--active .screen4__reset,
+.screen4--grown .screen4__reset {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
 }
 
-.screen4__area {
+.screen4__stage {
   position: relative;
   width: min(1180px, 100%);
   height: 760px;
@@ -809,11 +820,11 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   pointer-events: none;
 }
 
-.screen4__side_line--left {
+.screen4__side_line.side_left {
   left: -100px;
 }
 
-.screen4__side_line--right {
+.screen4__side_line.side_right {
   right: -100px;
 }
 
@@ -825,11 +836,11 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   height: 100%;
 }
 
-.elements--left {
+.elements.panel_left {
   left: 14px;
 }
 
-.elements--right {
+.elements.panel_right {
   right: 14px;
 }
 
@@ -866,7 +877,7 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   user-select: none;
 }
 
-.element--big img {
+.element.element_big img {
   max-width: 128px;
   max-height: 128px;
 }
@@ -876,18 +887,18 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   filter: saturate(0.85);
 }
 
-.elements--left .element:nth-child(1),
-.elements--right .element:nth-child(1) {
+.elements.panel_left .element:nth-child(1),
+.elements.panel_right .element:nth-child(1) {
   top: 118px;
 }
 
-.elements--left .element:nth-child(2),
-.elements--right .element:nth-child(2) {
+.elements.panel_left .element:nth-child(2),
+.elements.panel_right .element:nth-child(2) {
   top: 344px;
 }
 
-.elements--left .element:nth-child(3),
-.elements--right .element:nth-child(3) {
+.elements.panel_left .element:nth-child(3),
+.elements.panel_right .element:nth-child(3) {
   top: 580px;
 }
 
@@ -899,33 +910,33 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   justify-content: center;
 }
 
-.elements_drop,
-.plant_result {
+.screen4__drop_zone,
+.screen4__plant_box {
   position: absolute;
   left: 50%;
   top: 54%;
   transform: translate(-50%, -50%);
 }
 
-.elements_drop {
+.screen4__drop_zone {
   z-index: 6;
   width: min(472px, 40vw);
   aspect-ratio: 472 / 469;
   transition: opacity 0.38s ease, transform 0.38s ease;
 }
 
-.elements_drop.is-hovered {
+.screen4__drop_zone.is-hovered {
   transform: translate(-50%, -50%) scale(1.03);
 }
 
-.drop_circle {
+.screen4__drop_circle {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
 }
 
-.drop_text {
+.screen4__drop_text {
   position: absolute;
   inset: 0;
   display: flex;
@@ -940,30 +951,30 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   font-weight: 300;
 }
 
-.drop_text p:last-child {
+.screen4__drop_text p:last-child {
   font-size: 20px;
 }
 
-.elements_preview {
+.screen4__preview {
   position: absolute;
   inset: 18% 18%;
   pointer-events: none;
 }
 
-.element_preview {
+.screen4__preview_item {
   position: absolute;
   width: 74px;
   transform: translate(-50%, -50%);
   animation: drop_item_show 0.34s ease;
 }
 
-.element_preview img {
+.screen4__preview_item img {
   width: 100%;
   height: auto;
   object-fit: contain;
 }
 
-.plant_result {
+.screen4__plant_box {
   z-index: 4;
   width: min(1080px, 92vw);
   height: 640px;
@@ -971,46 +982,64 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   pointer-events: none;
 }
 
-.plant_base {
+.screen4__plant_base {
   position: absolute;
   left: 50%;
-  bottom: -75px;
+  bottom: -72px;
   width: 72%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(18px) scale(0.97);
   opacity: 0;
+  transition:
+    opacity 0.52s ease,
+    transform 0.78s ease;
 }
 
-.plant_rising {
+.screen4__plant_mask {
   position: absolute;
   left: 50%;
-  bottom: 74px;
-  width: min(460px, 48%);
-  transform: translateX(-50%) scale(0.97, 0.18);
-  opacity: 0;
-  filter: blur(1.2px) saturate(1.08);
-  clip-path: inset(86% 0 0 0);
-  transform-origin: center bottom;
-  will-change: transform, opacity, clip-path, filter;
+  bottom: 110px;
+  width: min(340px, 38%);
+  aspect-ratio: 525 / 783;
+  transform: translateX(-50%);
+  overflow: hidden;
+  pointer-events: none;
 }
 
-.screen4--grown .elements_drop {
+.screen4__plant_image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  transform: translateY(100%);
+  opacity: 0;
+  filter: saturate(1.02);
+  transform-origin: center bottom;
+  will-change: transform, opacity;
+  transition:
+    transform 1.58s cubic-bezier(0.18, 0.78, 0.2, 1) 0.42s,
+    opacity 0.42s ease 0.42s;
+}
+
+.screen4--grown .screen4__drop_zone {
   opacity: 0;
   transform: translate(-50%, -50%) scale(0.92);
   pointer-events: none;
 }
 
-.screen4--grown .plant_result {
+.screen4--grown .screen4__plant_box {
   opacity: 1;
 }
 
-.plant_result--show .plant_base {
-  animation: plant_base_show 0.62s ease-out forwards;
+.screen4__plant_box--show .screen4__plant_base {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
 }
 
-.plant_result--show .plant_rising {
-  animation:
-    plant_rising_grow 1.9s cubic-bezier(0.2, 0.74, 0.2, 1) 0.08s forwards,
-    plant_rising_breathe 3.2s ease-in-out 2s infinite;
+.screen4__plant_box--show .screen4__plant_image {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .element_drag {
@@ -1039,74 +1068,6 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   100% {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
-  }
-}
-
-@keyframes plant_base_show {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) translateY(28px) scale(0.9);
-  }
-
-  58% {
-    opacity: 1;
-    transform: translateX(-50%) translateY(-4px) scale(1.02);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0) scale(1);
-  }
-}
-
-@keyframes plant_rising_grow {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) scale(0.95, 0.16) translateY(54px);
-    clip-path: inset(88% 0 0 0);
-    filter: blur(1.8px) saturate(1.12);
-  }
-
-  18% {
-    opacity: 0.58;
-    transform: translateX(-50%) scale(0.96, 0.34) translateY(38px);
-    clip-path: inset(74% 0 0 0);
-    filter: blur(1.3px) saturate(1.1);
-  }
-
-  42% {
-    opacity: 1;
-    transform: translateX(-50%) scale(0.975, 0.64) translateY(18px);
-    clip-path: inset(42% 0 0 0);
-    filter: blur(0.8px) saturate(1.06);
-  }
-
-  68% {
-    opacity: 1;
-    transform: translateX(-50%) scale(0.992, 0.9) translateY(6px);
-    clip-path: inset(10% 0 0 0);
-    filter: blur(0.24px) saturate(1.02);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateX(-50%) scale(1, 1) translateY(0);
-    clip-path: inset(0 0 0 0);
-    filter: blur(0) saturate(1);
-  }
-}
-
-@keyframes plant_rising_breathe {
-  0% {
-    transform: translateX(-50%) scale(1, 1) translateY(0);
-  }
-
-  50% {
-    transform: translateX(-50%) scale(1.006, 0.996) translateY(-2px);
-  }
-
-  100% {
-    transform: translateX(-50%) scale(1, 1) translateY(0);
   }
 }
 
@@ -1147,11 +1108,11 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   pointer-events: none;
 }
 
-.screen5__line_group--left {
+.screen5__line_group.group_left {
   left: 4px;
 }
 
-.screen5__line_group--right {
+.screen5__line_group.group_right {
   right: 4px;
 }
 
@@ -1161,21 +1122,21 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   object-fit: contain;
 }
 
-.screen5__line--green {
+.screen5__line.line_green {
   top: 0;
   width: 100%;
 }
 
-.screen5__line--orange {
+.screen5__line.line_orange {
   top: 22px;
   width: min(360px, 72%);
 }
 
-.screen5__line_group--left .screen5__line--orange {
+.screen5__line_group.group_left .line_orange {
   left: 0;
 }
 
-.screen5__line_group--right .screen5__line--orange {
+.screen5__line_group.group_right .line_orange {
   right: 0;
 }
 
@@ -1198,7 +1159,7 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   cursor: pointer;
 }
 
-.screen5__garden {
+.screen5__stage {
   position: relative;
   width: 100vw;
   height: min(72vh, 760px);
@@ -1206,7 +1167,7 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   margin-left: calc(50% - 50vw);
 }
 
-.screen5__field {
+.screen5__ground {
   position: absolute;
   left: 50%;
   bottom: -18%;
@@ -1216,89 +1177,68 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
   user-select: none;
 }
 
-.screen5__plants {
+.screen5__flowers {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
 
-.screen5_plant {
+.screen5__flower {
   position: absolute;
   left: 0;
   bottom: 0;
   width: 200px;
-  transform: translateX(-50%) scale(0.97, 0.16) rotate(var(--plant-rotate, -0.6deg));
+  height: 0;
+  overflow: hidden;
+  transform: translateX(-50%);
+  transform-origin: center bottom;
+  will-change: height, opacity, transform;
+  transition: height 1.55s cubic-bezier(0.18, 0.78, 0.2, 1);
+}
+
+.screen5__flower img {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: var(--plant-height, 280px);
+  object-fit: contain;
+  object-position: center bottom;
+  user-select: none;
+  transform: rotate(var(--plant-rotate, -0.6deg)) translateY(16px);
   transform-origin: center bottom;
   opacity: 0;
-  filter: blur(1.2px) saturate(1.08);
-  clip-path: inset(86% 0 0 0);
-  will-change: transform, opacity, clip-path, filter;
+  filter: saturate(1.02);
+  will-change: transform, opacity;
+  transition:
+    transform 1.55s cubic-bezier(0.18, 0.78, 0.2, 1),
+    opacity 0.76s ease;
 }
 
-.screen5_plant img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  user-select: none;
+.screen5__flower.is-visible img {
+  opacity: 1;
+  transform: rotate(var(--plant-rotate, -0.6deg)) translateY(0);
 }
 
-.screen5_plant.is-growing {
-  animation:
-    screen5_plant_grow 2.8s cubic-bezier(0.2, 0.74, 0.2, 1) forwards,
-    screen5_plant_breathe 4.2s ease-in-out 2.8s infinite;
+.screen5__flower.is-resting img {
+  animation: screen5__flower_float 4.6s ease-in-out infinite;
 }
 
-.screen5_plant.is-removing {
+.screen5__flower.is-removing {
   animation: screen5_plant_out 0.38s ease forwards;
 }
 
-@keyframes screen5_plant_grow {
+@keyframes screen5__flower_float {
   0% {
-    opacity: 0;
-    transform: translateX(-50%) scale(0.96, 0.14) rotate(calc(var(--plant-rotate, 0deg) - 0.9deg)) translateY(42px);
-    clip-path: inset(88% 0 0 0);
-    filter: blur(1.8px) saturate(1.12);
-  }
-
-  18% {
-    opacity: 0.62;
-    transform: translateX(-50%) scale(0.968, 0.32) rotate(calc(var(--plant-rotate, 0deg) - 0.65deg)) translateY(28px);
-    clip-path: inset(72% 0 0 0);
-    filter: blur(1.2px) saturate(1.08);
-  }
-
-  44% {
-    opacity: 1;
-    transform: translateX(-50%) scale(0.984, 0.64) rotate(calc(var(--plant-rotate, 0deg) + 0.5deg)) translateY(12px);
-    clip-path: inset(38% 0 0 0);
-    filter: blur(0.62px) saturate(1.04);
-  }
-
-  72% {
-    transform: translateX(-50%) scale(0.996, 0.91) rotate(calc(var(--plant-rotate, 0deg) - 0.25deg)) translateY(3px);
-    clip-path: inset(10% 0 0 0);
-    filter: blur(0.18px) saturate(1.02);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateX(-50%) scale(1, 1) rotate(var(--plant-rotate, 0deg)) translateY(0);
-    clip-path: inset(0 0 0 0);
-    filter: blur(0) saturate(1);
-  }
-}
-
-@keyframes screen5_plant_breathe {
-  0% {
-    transform: translateX(-50%) scale(1, 1) rotate(var(--plant-rotate, 0deg)) translateY(0);
+    transform: rotate(var(--plant-rotate, 0deg)) translateY(0);
   }
 
   50% {
-    transform: translateX(-50%) scale(1.008, 0.995) rotate(calc(var(--plant-rotate, 0deg) + 0.7deg)) translateY(-2px);
+    transform: rotate(calc(var(--plant-rotate, 0deg) + 0.7deg)) translateY(-2px);
   }
 
   100% {
-    transform: translateX(-50%) scale(1, 1) rotate(var(--plant-rotate, 0deg)) translateY(0);
+    transform: rotate(var(--plant-rotate, 0deg)) translateY(0);
   }
 }
 
@@ -1320,9 +1260,9 @@ for new screens: screen5, screen6 and simple names like title, photo, button, pl
 .screen2__slider_row span,
 .screen3__title,
 .screen4__title,
-.drop_text,
-.drop_text p:last-child,
+.screen4__drop_text,
+.screen4__drop_text p:last-child,
 .screen5__title {
-  font-size: 29px;
+  font-size: 27px;
   line-height: 1.08;
 }
