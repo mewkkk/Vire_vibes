@@ -11,6 +11,16 @@
   <body>
     <canvas class="cursor_swarm" id="cursor_swarm" aria-hidden="true"></canvas>
 
+    <div class="help_note" id="help_note" aria-hidden="true">
+      <div class="help_note__back"></div>
+      <div class="help_note__box" role="dialog" aria-modal="true" aria-labelledby="help_note_text">
+        <button class="help_note__close" id="help_note_close" type="button" aria-label="Закрыть подсказку">
+          +
+        </button>
+        <p class="help_note__text" id="help_note_text"></p>
+      </div>
+    </div>
+
     <main class="page">
       <!-- screen1: logo -->
       <section class="screen1" id="screen1">
@@ -57,11 +67,11 @@
         <div class="screen2__rings rings_left"></div>
         <div class="screen2__rings rings_right"></div>
 
-        <div class="screen2__icons" aria-hidden="true">
+        <div class="screen2__icons">
           <img src="assets/screen2/Ellipse 81.svg" alt="" />
           <img src="assets/screen2/Ellipse 87.svg" alt="" />
           <img src="assets/screen2/Ellipse 88.svg" alt="" />
-          <div class="screen2__question">?</div>
+          <button class="screen2__question" id="screen2_help" type="button" aria-label="Подсказка">?</button>
         </div>
 
         <div class="screen2__top">
@@ -123,7 +133,7 @@
 
       <!-- screen3: plants -->
       <section class="screen3" id="screen3">
-        <div class="screen3__question">?</div>
+        <button class="screen3__question" id="screen3_help" type="button" aria-label="Подсказка">?</button>
 
         <div class="screen3__top">
           <div class="screen3__title_lines">
@@ -205,6 +215,10 @@
             <img src="assets/screen3/download (37) 2.png" alt="Сухоцвет справа" />
             <img class="plant_card card_left" src="assets/screen3/Group 133.svg" alt="Карточка растения NUBIS-V2" />
           </article>
+
+          <div class="screen3__card_spot" id="screen3_card_spot" aria-hidden="true">
+            <img class="screen3__card_view" id="screen3_card_view" alt="" />
+          </div>
         </div>
       </section>
 
@@ -237,6 +251,7 @@
 
             <button
               class="screen4__button screen4__help"
+              id="screen4_help"
               type="button"
               aria-label="Подсказка"
             >
@@ -307,7 +322,7 @@
             <div class="screen4__drop_zone" id="screen4_drop_zone">
               <img
                 class="screen4__drop_circle"
-                src="assets/screen4/Ellipse 102.svg"
+                src="assets/screen4/circle.svg"
                 alt=""
               />
               <div class="screen4__drop_text">
@@ -350,7 +365,7 @@
             <img class="screen5__line line_orange" src="assets/screen5/Vector 327.svg" alt="" />
           </div>
 
-          <button class="screen5__question" type="button" aria-label="Подсказка">?</button>
+          <button class="screen5__question" id="screen5_help" type="button" aria-label="Подсказка">?</button>
         </div>
 
         <div class="screen5__stage">
@@ -361,6 +376,11 @@
             alt="Поле для выращивания цветка"
           />
           <div class="screen5__flowers" id="screen5_flowers" aria-live="polite"></div>
+        </div>
+
+        <div class="screen5__credits">
+          <p class="screen5__credit credit_left">Софинская Мария<br />Б25Д311</p>
+          <p class="screen5__credit credit_right">Кураторы:<br />Цветников Николай, Комкова Анна</p>
         </div>
       </section>
     </main>

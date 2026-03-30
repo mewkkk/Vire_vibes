@@ -26,7 +26,7 @@ function getColorByValue(value, startColor, middleColor, endColor) {
 function startLogo() {
   const logoBox = document.getElementById("logo");
   const logoCanvas = document.getElementById("logo_canvas");
-  const logoColor = "#0a4d2c";
+  const logoColor = "#083720";
 
   if (!logoBox || !logoCanvas) {
     return;
@@ -363,6 +363,8 @@ function startClimate() {
 function startCards() {
   const plantsArea = document.getElementById("screen3_plants");
   const plantItems = plantsArea ? Array.from(plantsArea.querySelectorAll(".plant")) : [];
+  const cardSpot = document.getElementById("screen3_card_spot");
+  const cardView = document.getElementById("screen3_card_view");
 
   if (!plantsArea || plantItems.length === 0) {
     return;
@@ -373,6 +375,12 @@ function startCards() {
     plantItems.forEach((plantItem) => {
       plantItem.classList.remove("is-active");
     });
+
+    if (cardSpot && cardView) {
+      cardSpot.setAttribute("aria-hidden", "true");
+      cardView.removeAttribute("src");
+      cardView.alt = "";
+    }
   }
 
   function showCard(plantItem) {
@@ -380,6 +388,16 @@ function startCards() {
     plantItems.forEach((item) => {
       item.classList.toggle("is-active", item === plantItem);
     });
+
+    if (cardSpot && cardView) {
+      const sourceCard = plantItem.querySelector(".plant_card");
+
+      if (sourceCard instanceof HTMLImageElement) {
+        cardView.src = sourceCard.currentSrc || sourceCard.src;
+        cardView.alt = sourceCard.alt;
+        cardSpot.setAttribute("aria-hidden", "false");
+      }
+    }
   }
 
   plantItems.forEach((plantItem) => {
@@ -737,6 +755,72 @@ function startGrowFlowers() {
   field.addEventListener("click", growFlower);
 }
 
+function startHelpNotes() {
+  const note = document.getElementById("help_note");
+  const noteText = document.getElementById("help_note_text");
+  const closeButton = document.getElementById("help_note_close");
+
+  if (!note || !noteText || !closeButton) {
+    return;
+  }
+
+  const helpButtons = [
+    {
+      id: "screen2_help",
+      text: "Потяни за слайдер и дерево изменится",
+    },
+    {
+      id: "screen3_help",
+      text: "Кликни на растение и появится краткая информация",
+    },
+    {
+      id: "screen4_help",
+      text: "Перетащи все элементы в центр круга, через секунду вырастет растение",
+    },
+    {
+      id: "screen5_help",
+      text: "Покликай по полю в любом месте и вырастет целое поле из необычных растений",
+    },
+  ];
+
+  function openNote(text) {
+    noteText.textContent = text;
+    note.classList.add("is-open");
+    note.setAttribute("aria-hidden", "false");
+  }
+
+  function closeNote() {
+    note.classList.remove("is-open");
+    note.setAttribute("aria-hidden", "true");
+  }
+
+  helpButtons.forEach((item) => {
+    const button = document.getElementById(item.id);
+
+    if (!button) {
+      return;
+    }
+
+    button.addEventListener("click", () => {
+      openNote(item.text);
+    });
+  });
+
+  closeButton.addEventListener("click", closeNote);
+
+  note.addEventListener("click", (event) => {
+    if (event.target === note || event.target.classList.contains("help_note__back")) {
+      closeNote();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeNote();
+    }
+  });
+}
+
 function startCursor() {
   if (!window.matchMedia("(pointer: fine)").matches) {
     return;
@@ -909,4 +993,5 @@ startClimate();
 startCards();
 startBuildPlant();
 startGrowFlowers();
+startHelpNotes();
 startCursor();
