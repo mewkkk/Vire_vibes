@@ -116,8 +116,6 @@ body {
   overflow: hidden;
 }
 
-/* screen1: logo */
-
 .screen1 {
   position: relative;
   min-height: 100vh;
@@ -353,8 +351,6 @@ body {
   }
 }
 
-/* screen2: climate */
-
 .screen2 {
   --temp-color: #49903e;
   --humidity-color: #49903e;
@@ -561,8 +557,6 @@ body {
   color: var(--green-dark);
   cursor: pointer;
 }
-
-/* screen3: plants */
 
 .screen3 {
   position: relative;
@@ -783,8 +777,6 @@ body {
   width: 314px;
   height: 414px;
 }
-
-/* screen4: build plant */
 
 .screen4 {
   position: relative;
@@ -1132,8 +1124,6 @@ body {
   }
 }
 
-/* screen5: grow flower */
-
 .screen5 {
   position: relative;
   min-height: 114vh;
@@ -1357,7 +1347,6 @@ body {
   }
 }
 
-/* same text size for all labels */
 .screen1__subtitle,
 .screen2__title,
 .screen2__slider_row span,

@@ -1,4 +1,3 @@
-// screen1: logo
 function mixNumber(start, end, progress) {
   return Math.round(start + (end - start) * progress);
 }
@@ -187,7 +186,6 @@ function startLogo() {
   }
 }
 
-// screen2: climate
 function startClimate() {
   const section = document.getElementById("screen2");
   const climateCanvas = document.getElementById("screen2_canvas");
@@ -359,7 +357,6 @@ function startClimate() {
   onResize();
 }
 
-// screen3: plant cards
 function startCards() {
   const plantsArea = document.getElementById("screen3_plants");
   const plantItems = plantsArea ? Array.from(plantsArea.querySelectorAll(".plant")) : [];
@@ -433,7 +430,6 @@ function startCards() {
   });
 }
 
-// screen4: build plant
 function startBuildPlant() {
   const section = document.getElementById("screen4");
   const dropZone = document.getElementById("screen4_drop_zone");
@@ -613,7 +609,6 @@ function startBuildPlant() {
   resetButton.addEventListener("click", resetBuild);
 }
 
-// screen5: grow random flower
 function startGrowFlowers() {
   const field = document.getElementById("screen5_ground");
   const flowersLayer = document.getElementById("screen5_flowers");
